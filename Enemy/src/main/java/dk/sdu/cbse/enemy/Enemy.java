@@ -1,4 +1,4 @@
-package dk.sdu.cbse;
+package dk.sdu.cbse.enemy;
 
 public class Enemy {
     public static void main(String[] args) {
