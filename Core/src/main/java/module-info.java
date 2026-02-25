@@ -1,3 +1,2 @@
 module Core {
-    requires Bullet;
 }

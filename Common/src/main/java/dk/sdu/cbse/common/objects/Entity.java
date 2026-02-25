@@ -1,4 +1,4 @@
-package dk.sdu.cbse.common;
+package dk.sdu.cbse.common.objects;
 
 public class Entity {
 
