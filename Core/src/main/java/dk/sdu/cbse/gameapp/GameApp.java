@@ -10,7 +10,11 @@ public class GameApp extends Application{
     }
 
     @Override
-    public void start(Stage stage) throws Exception {
+    public void start(Stage window) throws Exception {
         System.out.println("GameApp main");
+
+        Game game = new Game();
+        game.start(window);
+        game.render();
     }
 }
