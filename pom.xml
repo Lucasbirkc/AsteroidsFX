@@ -11,7 +11,23 @@
     <maven.compiler.target>1.9</maven.compiler.target>
   </properties>
   <dependencyManagement>
-    <dependencies/>
+    <dependencies>
+      <dependency>
+        <groupId>org.openjfx</groupId>
+        <artifactId>javafx-controls</artifactId>
+        <version>21.0.2</version>
+      </dependency>
+      <dependency>
+        <groupId>org.openjfx</groupId>
+        <artifactId>javafx-graphics</artifactId>
+        <version>21.0.2</version>
+      </dependency>
+      <dependency>
+        <groupId>org.openjfx</groupId>
+        <artifactId>javafx-base</artifactId>
+        <version>21.0.2</version>
+      </dependency>
+    </dependencies>
   </dependencyManagement>
   <build>
     <plugins>
@@ -43,7 +59,7 @@
           <arguments>
             <argument>--module-path=mods-mvn</argument>
             <argument>--class-path=libs/*</argument>
-            <argument>- agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=127.0.0.1:8000
+            <argument>-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=127.0.0.1:8000
 </argument>
             <argument>--module=Core/dk.sdu.mmmi.cbse.main.Main</argument>
             <argument>--add-modules javafx.graphics</argument>
@@ -118,5 +134,8 @@
   </profiles>
   <modules>
     <module>Core</module>
+    <module>Player</module>
+    <module>Enemy</module>
+    <module>Bullet</module>
   </modules>
 </project>
