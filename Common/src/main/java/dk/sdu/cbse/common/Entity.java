@@ -2,7 +2,7 @@ package dk.sdu.cbse.common;
 
 public class Entity {
 
-    private double[] polygonCoordinates
+    private double[] polygonCoordinates;
     private double posX;
     private double posY;
     private double rotation;
@@ -12,7 +12,7 @@ public class Entity {
         this.polygonCoordinates = newPolygonCoordinates;
     }
 
-    public void getPolygonCoordinates() {
+    public double[] getPolygonCoordinates() {
         return polygonCoordinates;
     }
 
@@ -20,7 +20,7 @@ public class Entity {
         this.posX = newPosX;
     }
 
-    public void getPosX() {
+    public double getPosX() {
         return posX;
     }
 
@@ -28,7 +28,7 @@ public class Entity {
         this.posY = newPosY;
     }
 
-    public void getPosY() {
+    public double getPosY() {
         return posY;
     }
 
@@ -36,7 +36,7 @@ public class Entity {
         this.rotation = newRotation;
     }
 
-    public void getRotation() {
+    public double getRotation() {
         return rotation;
     }
 
@@ -44,7 +44,7 @@ public class Entity {
         this.radius = newRadius;
     }
 
-    public void getRadius() {
+    public double getRadius() {
         return radius;
     }
 }
