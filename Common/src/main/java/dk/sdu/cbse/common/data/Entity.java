@@ -2,6 +2,7 @@ package dk.sdu.cbse.common.data;
 
 import dk.sdu.cbse.common.parts.IEntityPart;
 
+import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -14,7 +15,7 @@ public class Entity {
         this.parts = new ConcurrentHashMap<>();
     }
 
-    public String getID() {
+    public String getId() {
         return id;
     }
 
