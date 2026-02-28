@@ -6,8 +6,8 @@ import dk.sdu.cbse.common.data.World;
 public interface IEntityProcessorService {
     /**
      *
-     * @param gameData
-     * @param world
+     * @param gameData holds information about window/display and keys for playing
+     * @param world holds information about world with regards all Entities (Player, bullets, asteroids etc.)
      */
     void process(GameData gameData, World world);
 }
