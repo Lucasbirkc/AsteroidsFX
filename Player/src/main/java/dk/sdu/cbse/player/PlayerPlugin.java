@@ -2,7 +2,7 @@ package dk.sdu.cbse.player;
 
 public class PlayerPlugin {
 
-    private string player;
+    private String player;
 
     public PlayerPlugin() {
         System.out.println("PlayerPlugin initialized");

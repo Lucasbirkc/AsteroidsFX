@@ -6,9 +6,6 @@
     <groupId>dk.sdu.cbse</groupId>
     <version>1.0-SNAPSHOT</version>
   </parent>
-  <groupId>dk.sdu.cbse.bullet</groupId>
   <artifactId>Bullet</artifactId>
-  <version>1.0-SNAPSHOT</version>
   <packaging>jar</packaging>
-  <name>Bullet</name>
 </project>

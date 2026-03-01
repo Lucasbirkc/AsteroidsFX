@@ -1,4 +1,4 @@
-package dk.sdu.cbse.gameapp;
+package dk.sdu.cbse.main;
 
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;

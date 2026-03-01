@@ -2,7 +2,7 @@ package dk.sdu.cbse.enemy;
 
 public class EnemyPlugin {
 
-    private string enemy;
+    private String enemy;
 
     public EnemyPlugin() {
         System.out.println("EnemyPlugin initialized");
