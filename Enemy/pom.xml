@@ -8,7 +8,6 @@
   </parent>
   <groupId>dk.sdu.cbse.enemy</groupId>
   <artifactId>Enemy</artifactId>
-  <version>1.0-SNAPSHOT</version>
   <packaging>jar</packaging>
   <name>Enemy</name>
 </project>
