@@ -10,4 +10,11 @@
   <artifactId>Player</artifactId>
   <packaging>jar</packaging>
   <name>Player</name>
+  <dependencies>
+    <dependency>
+      <groupId>${parent.groupId}.common</groupId>
+      <artifactId>Common</artifactId>
+      <version>${parent.version}</version>
+    </dependency>
+  </dependencies>
 </project>

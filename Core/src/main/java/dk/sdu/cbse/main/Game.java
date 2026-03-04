@@ -50,7 +50,9 @@ class Game {
     }
 
     public void update() {
-        System.out.println("Game updated");
+        for (IEntityProcessorService entityProcessorService : getEntityProcessorServices()) {
+            entityProcessorService.process(gameData, world);
+        }
     }
 
     public void draw() {
