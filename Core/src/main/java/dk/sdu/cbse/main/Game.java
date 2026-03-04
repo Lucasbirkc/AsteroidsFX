@@ -6,6 +6,7 @@ import dk.sdu.cbse.common.parts.IEntityPart;
 import dk.sdu.cbse.common.services.IEntityProcessorService;
 import dk.sdu.cbse.common.services.IGamePluginService;
 import dk.sdu.cbse.common.services.IPostEntityProcessorService;
+import javafx.animation.AnimationTimer;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -39,14 +40,21 @@ class Game {
 
     public void render() {
         System.out.println("Game rendered");
+        new AnimationTimer() {
+            @Override
+            public void handle(long now) {
+                update();
+                draw();
+            }
+        }.start();
     }
 
     public void update() {
-
+        System.out.println("Game updated");
     }
 
     public void draw() {
-
+        System.out.println("Game drawn");
     }
 
     public List<IGamePluginService> getGamePluginServices() { return gamePluginServices; }
