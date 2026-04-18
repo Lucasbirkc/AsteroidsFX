@@ -10,17 +10,17 @@ import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
-import java.util.List;
+import java.util.Collection;
 
 class Game {
     private final GameData gameData = new GameData();
     private final World world = new World();
     private final Pane gameWindow = new Pane();
-    private final List<IEntityProcessorService> entityProcessorServices;
-    private final List<IPostEntityProcessorService> postEntityProcessorServices;
-    private final List<IGamePluginService> gamePluginServices;
+    private final Collection<? extends IEntityProcessorService> entityProcessorServices;
+    private final Collection<? extends IPostEntityProcessorService> postEntityProcessorServices;
+    private final Collection<? extends IGamePluginService> gamePluginServices;
 
-    Game(List<IGamePluginService> gamePluginServices, List<IEntityProcessorService> entityProcessingServices, List<IPostEntityProcessorService> postEntityProcessingServices) {
+    Game(Collection<? extends IGamePluginService> gamePluginServices, Collection<? extends IEntityProcessorService> entityProcessingServices, Collection<? extends IPostEntityProcessorService> postEntityProcessingServices) {
         this.entityProcessorServices = entityProcessingServices;
         this.postEntityProcessorServices = postEntityProcessingServices;
         this.gamePluginServices = gamePluginServices;
@@ -49,7 +49,7 @@ class Game {
 
     }
 
-    public List<IGamePluginService> getGamePluginServices() { return gamePluginServices; }
-    public List<IEntityProcessorService> getEntityProcessorServices() { return entityProcessorServices; }
-    public List<IPostEntityProcessorService> getPostEntityProcessorServices() { return postEntityProcessorServices; }
+    public Collection<? extends IGamePluginService> getGamePluginServices() { return gamePluginServices; }
+    public Collection<? extends IEntityProcessorService> getEntityProcessorServices() { return entityProcessorServices; }
+    public Collection<? extends IPostEntityProcessorService> getPostEntityProcessorServices() { return postEntityProcessorServices; }
 }
