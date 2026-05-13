@@ -11,6 +11,7 @@
     <module>Enemy</module>
     <module>Bullet</module>
     <module>Common</module>
+    <module>Asteroid</module>
   </modules>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
