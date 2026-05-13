@@ -14,6 +14,11 @@ public class Entity implements Serializable {
 
     public String getId() { return this.id.toString(); }
 
+    public double[] getCoordinates()
+    {
+        return this.coordinates;
+    }
+
     public double getPosX()
     {
         return this.posX;
@@ -32,6 +37,11 @@ public class Entity implements Serializable {
     public double getRadius()
     {
         return this.radius;
+    }
+
+    public void setCoordinates(double[] newCoordinates)
+    {
+        this.coordinates = newCoordinates;
     }
 
     public void setPosX(double newX)
