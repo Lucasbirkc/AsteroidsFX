@@ -31,6 +31,7 @@ public class Main extends Application{
 
     private Collection<? extends IGamePluginService> getGamePluginServices()
     {
+        // Direct dependency implementation
         Collection<IGamePluginService> plugins = new ArrayList<>();
 
         plugins.add(new PlayerPlugin());
@@ -40,6 +41,7 @@ public class Main extends Application{
 
     private Collection<? extends IEntityProcessorService> getEntityProcessingServices()
     {
+        // Direct dependency implementation
         Collection<IEntityProcessorService> processors = new ArrayList<>();
 
         return processors;
@@ -47,6 +49,7 @@ public class Main extends Application{
 
     private Collection<? extends IPostEntityProcessorService> getPostEntityProcessingServices()
     {
+        // Direct dependency implementation
         Collection<IPostEntityProcessorService> postProcessors = new ArrayList<>();
 
         return postProcessors;
