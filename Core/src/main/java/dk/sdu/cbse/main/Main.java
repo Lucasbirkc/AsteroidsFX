@@ -3,10 +3,16 @@ package dk.sdu.cbse.main;
 import dk.sdu.cbse.common.services.IEntityProcessorService;
 import dk.sdu.cbse.common.services.IGamePluginService;
 import dk.sdu.cbse.common.services.IPostEntityProcessorService;
+import dk.sdu.cbse.player.Player;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
+import java.util.ArrayList;
 import java.util.Collection;
+
+// Hard dependencies : Imports for testing
+import dk.sdu.cbse.player.PlayerPlugin;
+import dk.sdu.cbse.player.PlayerControl;
 
 public class Main extends Application{
 
@@ -25,16 +31,24 @@ public class Main extends Application{
 
     private Collection<? extends IGamePluginService> getGamePluginServices()
     {
-        return null;
+        Collection<IGamePluginService> plugins = new ArrayList<>();
+
+        plugins.add(new PlayerPlugin());
+
+        return plugins;
     }
 
     private Collection<? extends IEntityProcessorService> getEntityProcessingServices()
     {
-        return null;
+        Collection<IEntityProcessorService> processors = new ArrayList<>();
+
+        return processors;
     }
 
     private Collection<? extends IPostEntityProcessorService> getPostEntityProcessingServices()
     {
-        return null;
+        Collection<IPostEntityProcessorService> postProcessors = new ArrayList<>();
+
+        return postProcessors;
     }
 }
