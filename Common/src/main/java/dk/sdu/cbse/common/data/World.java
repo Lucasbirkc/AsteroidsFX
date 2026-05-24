@@ -1,20 +1,17 @@
 package dk.sdu.cbse.common.data;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class World {
 
-    private final Map<String, Entity> entityMap = new ConcurrentHashMap<>();
+    private final Map<UUID, Entity> entityMap = new ConcurrentHashMap<>();
 
     public void addEntity(Entity entity) {
         entityMap.put(entity.getId(), entity);
     }
 
-    public void removeEntity(String entityId) {
+    public void removeEntity(UUID entityId) {
         entityMap.remove(entityId);
     }
 
@@ -22,7 +19,7 @@ public class World {
         entityMap.remove(entity.getId());
     }
 
-    public Entity getEntity(String entityId) {
+    public Entity getEntity(UUID entityId) {
         return entityMap.get(entityId);
     }
 

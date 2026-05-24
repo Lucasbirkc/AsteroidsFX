@@ -12,7 +12,7 @@ public class Entity implements Serializable {
     private double rotation;
     private float radius;
 
-    public String getId() { return this.id.toString(); }
+    public UUID getId() { return this.id; }
 
     public double[] getCoordinates()
     {

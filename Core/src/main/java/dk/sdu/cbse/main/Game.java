@@ -1,21 +1,28 @@
 package dk.sdu.cbse.main;
-
+// Project imports
+import dk.sdu.cbse.common.data.Entity;
 import dk.sdu.cbse.common.data.GameData;
 import dk.sdu.cbse.common.data.World;
 import dk.sdu.cbse.common.services.IEntityProcessorService;
 import dk.sdu.cbse.common.services.IGamePluginService;
 import dk.sdu.cbse.common.services.IPostEntityProcessorService;
+// Game "Engine" imports
 import javafx.animation.AnimationTimer;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
+import javafx.scene.shape.Polygon;
 import javafx.stage.Stage;
-
+// Data structures, etc.
 import java.util.Collection;
+import java.util.Map;
+import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
 
 class Game {
     private final GameData gameData = new GameData();
     private final World world = new World();
     private final Pane gameWindow = new Pane();
+    private final Map<UUID, Polygon> entityPolygons = new ConcurrentHashMap<>();
     private final Collection<? extends IEntityProcessorService> entityProcessorServices;
     private final Collection<? extends IPostEntityProcessorService> postEntityProcessorServices;
     private final Collection<? extends IGamePluginService> gamePluginServices;
@@ -31,6 +38,17 @@ class Game {
         gameWindow.setPrefSize(gameData.getDisplayWidth(), gameData.getDisplayHeight());
 
         Scene scene = new Scene(gameWindow);
+
+        for (IGamePluginService iGamePluginService : getGamePluginServices())
+        {
+            iGamePluginService.start(gameData, world);
+        }
+
+        for (Entity entity : world.getEntities())
+        {
+            Polygon polygon = new Polygon(entity.getPolygonCoordinates());
+
+        }
 
         window.setScene(scene);
         window.setTitle("Asteroids");
