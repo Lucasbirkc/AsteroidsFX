@@ -2,7 +2,6 @@ package dk.sdu.cbse.main;
 
 import dk.sdu.cbse.common.data.GameData;
 import dk.sdu.cbse.common.data.World;
-import dk.sdu.cbse.common.parts.IEntityPart;
 import dk.sdu.cbse.common.services.IEntityProcessorService;
 import dk.sdu.cbse.common.services.IGamePluginService;
 import dk.sdu.cbse.common.services.IPostEntityProcessorService;
