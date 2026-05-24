@@ -46,8 +46,10 @@ class Game {
 
         for (Entity entity : world.getEntities())
         {
-            Polygon polygon = new Polygon(entity.getPolygonCoordinates());
+            Polygon polygon = new Polygon(entity.getCoordinates());
 
+            entityPolygons.put(entity.getId(), polygon);
+            addPolygonToGameWindow(polygon);
         }
 
         window.setScene(scene);
@@ -75,7 +77,9 @@ class Game {
         System.out.println("Drawing");
     }
 
-    public Collection<? extends IGamePluginService> getGamePluginServices() { return gamePluginServices; }
-    public Collection<? extends IEntityProcessorService> getEntityProcessorServices() { return entityProcessorServices; }
-    public Collection<? extends IPostEntityProcessorService> getPostEntityProcessorServices() { return postEntityProcessorServices; }
+    private Collection<? extends IGamePluginService> getGamePluginServices() { return gamePluginServices; }
+    private Collection<? extends IEntityProcessorService> getEntityProcessorServices() { return entityProcessorServices; }
+    private Collection<? extends IPostEntityProcessorService> getPostEntityProcessorServices() { return postEntityProcessorServices; }
+
+    private void addPolygonToGameWindow(Polygon polygon) { gameWindow.getChildren().add(polygon); }
 }
