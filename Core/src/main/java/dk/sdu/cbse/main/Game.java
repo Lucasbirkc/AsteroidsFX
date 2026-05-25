@@ -33,7 +33,6 @@ class Game {
     }
 
     public void start(Stage window) throws Exception {
-        System.out.println("Game starts");
         gameWindow.setPrefSize(gameData.getDisplayWidth(), gameData.getDisplayHeight());
 
         Scene scene = new Scene(gameWindow);
@@ -49,11 +48,9 @@ class Game {
     }
 
     public void render() {
-        System.out.println("Game rendering");
         new AnimationTimer() {
             @Override
             public void handle(long now) {
-                System.out.println("Rendering");
                 update();
                 draw();
             }
@@ -61,7 +58,6 @@ class Game {
     }
 
     public void update() {
-        System.out.println("Updating");
         for (IEntityProcessorService entityProcessorService : getEntityProcessorServices())
         {
             entityProcessorService.process(gameData, world);
@@ -73,7 +69,6 @@ class Game {
     }
 
     public void draw() {
-        System.out.println("Drawing");
         entityPolygons.entrySet().removeIf(entry -> {
             Entity entity = entry.getKey();
             Polygon polygon = entry.getValue();
