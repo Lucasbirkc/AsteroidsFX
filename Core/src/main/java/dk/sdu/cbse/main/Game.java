@@ -14,15 +14,14 @@ import javafx.scene.shape.Polygon;
 import javafx.stage.Stage;
 // Data structures, etc.
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
-import java.util.concurrent.ConcurrentHashMap;
 
 class Game {
     private final GameData gameData = new GameData();
     private final World world = new World();
     private final Pane gameWindow = new Pane();
-    private final Map<UUID, Polygon> entityPolygons = new ConcurrentHashMap<>();
+    private final Map<Entity, Polygon> entityPolygons = new HashMap<>();
     private final Collection<? extends IEntityProcessorService> entityProcessorServices;
     private final Collection<? extends IPostEntityProcessorService> postEntityProcessorServices;
     private final Collection<? extends IGamePluginService> gamePluginServices;
@@ -44,14 +43,6 @@ class Game {
             iGamePluginService.start(gameData, world);
         }
 
-        for (Entity entity : world.getEntities())
-        {
-            Polygon polygon = new Polygon(entity.getCoordinates());
-
-            entityPolygons.put(entity.getId(), polygon);
-            addPolygonToGameWindow(polygon);
-        }
-
         window.setScene(scene);
         window.setTitle("Asteroids");
         window.show();
@@ -71,10 +62,40 @@ class Game {
 
     public void update() {
         System.out.println("Updating");
+        for (IEntityProcessorService entityProcessorService : getEntityProcessorServices())
+        {
+            entityProcessorService.process(gameData, world);
+        }
+        for (IPostEntityProcessorService postEntityProcessorService : getPostEntityProcessorServices())
+        {
+            postEntityProcessorService.process(gameData, world);
+        }
     }
 
     public void draw() {
         System.out.println("Drawing");
+        entityPolygons.entrySet().removeIf(entry -> {
+            Entity entity = entry.getKey();
+            Polygon polygon = entry.getValue();
+
+            if (!world.getEntities().contains(entity))
+            {
+                removePolygonFromGameWindow(polygon);
+                return true;
+            }
+            return false;
+        });
+
+        for (Entity entity : world.getEntities())
+        {
+            Polygon polygon = entityPolygons.computeIfAbsent(entity, e -> {
+                Polygon newPolygon = new Polygon(e.getCoordinates());
+                addPolygonToGameWindow(newPolygon);
+                return newPolygon;
+            });
+
+            setPolygonPosition(polygon, entity);
+        }
     }
 
     private Collection<? extends IGamePluginService> getGamePluginServices() { return gamePluginServices; }
@@ -82,4 +103,12 @@ class Game {
     private Collection<? extends IPostEntityProcessorService> getPostEntityProcessorServices() { return postEntityProcessorServices; }
 
     private void addPolygonToGameWindow(Polygon polygon) { gameWindow.getChildren().add(polygon); }
+    private void removePolygonFromGameWindow(Polygon polygon) { gameWindow.getChildren().remove(polygon); }
+
+    private void setPolygonPosition(Polygon polygon, Entity entity)
+    {
+        polygon.setTranslateX(entity.getPosX());
+        polygon.setTranslateY(entity.getPosY());
+        polygon.setRotate(entity.getRotation());
+    }
 }
