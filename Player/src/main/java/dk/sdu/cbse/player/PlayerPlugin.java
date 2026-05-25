@@ -29,7 +29,8 @@ public class PlayerPlugin implements IGamePluginService {
     @Override
     public void start(GameData gameData, World world)
     {
-        world.addEntity(createPlayer((gameData)));
+        player = createPlayer(gameData);
+        world.addEntity(player);
     }
 
     @Override
