@@ -7,8 +7,11 @@ import dk.sdu.cbse.common.services.IEntityProcessorService;
 import dk.sdu.cbse.common.services.IGamePluginService;
 import dk.sdu.cbse.common.services.IPostEntityProcessorService;
 // Game "Engine" imports
+import dk.sdu.cbse.commoninput.data.GameAction;
+import dk.sdu.cbse.commoninput.services.IInputService;
 import javafx.animation.AnimationTimer;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Polygon;
 import javafx.stage.Stage;
@@ -21,6 +24,9 @@ class Game {
     private final GameData gameData = new GameData();
     private final World world = new World();
     private final Pane gameWindow = new Pane();
+
+    private final IInputService inputService = new InputManager();
+
     private final Map<Entity, Polygon> entityPolygons = new HashMap<>();
     private final Collection<? extends IEntityProcessorService> entityProcessorServices;
     private final Collection<? extends IPostEntityProcessorService> postEntityProcessorServices;
@@ -36,6 +42,9 @@ class Game {
         gameWindow.setPrefSize(gameData.getDisplayWidth(), gameData.getDisplayHeight());
 
         Scene scene = new Scene(gameWindow);
+
+        scene.setOnKeyPressed(event -> handleKey(event.getCode(), true));
+        scene.setOnKeyReleased(event -> handleKey(event.getCode(), false));
 
         for (IGamePluginService iGamePluginService : getGamePluginServices())
         {
@@ -58,6 +67,8 @@ class Game {
     }
 
     public void update() {
+        inputService.update();
+
         for (IEntityProcessorService entityProcessorService : getEntityProcessorServices())
         {
             entityProcessorService.process(gameData, world);
@@ -99,6 +110,17 @@ class Game {
 
     private void addPolygonToGameWindow(Polygon polygon) { gameWindow.getChildren().add(polygon); }
     private void removePolygonFromGameWindow(Polygon polygon) { gameWindow.getChildren().remove(polygon); }
+
+    private void handleKey(KeyCode code, boolean isPressed)
+    {
+        switch (code)
+        {
+            case LEFT, A -> inputService.setActionState(GameAction.MOVE_LEFT, isPressed);
+            case RIGHT, D -> inputService.setActionState(GameAction.MOVE_RIGHT, isPressed);
+            case UP, W -> inputService.setActionState(GameAction.THRUST, isPressed);
+            case SPACE -> inputService.setActionState(GameAction.SHOOT, isPressed);
+        }
+    }
 
     private void setPolygonPosition(Polygon polygon, Entity entity)
     {
