@@ -44,6 +44,8 @@ public class Main extends Application{
         // Direct dependency implementation
         Collection<IEntityProcessorService> processors = new ArrayList<>();
 
+        processors.add(new PlayerControl());
+
         return processors;
     }
 

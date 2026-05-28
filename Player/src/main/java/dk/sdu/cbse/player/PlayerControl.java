@@ -16,6 +16,11 @@ public class PlayerControl implements IEntityProcessorService {
     {
         IInputService input = gameData.getInputService();
 
+        if (input == null)
+        {
+            return;
+        }
+
         for (Entity player : world.getEntities(Player.class))
         {
             if (input.isActive(GameAction.MOVE_LEFT))

@@ -46,6 +46,8 @@ class Game {
         scene.setOnKeyPressed(event -> handleKey(event.getCode(), true));
         scene.setOnKeyReleased(event -> handleKey(event.getCode(), false));
 
+        gameData.setInputService(inputService);
+
         for (IGamePluginService iGamePluginService : getGamePluginServices())
         {
             iGamePluginService.start(gameData, world);
