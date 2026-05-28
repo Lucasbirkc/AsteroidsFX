@@ -1,5 +1,6 @@
 package dk.sdu.cbse.main;
 
+import dk.sdu.cbse.asteroid.AsteroidPlugin;
 import dk.sdu.cbse.common.services.IEntityProcessorService;
 import dk.sdu.cbse.common.services.IGamePluginService;
 import dk.sdu.cbse.common.services.IPostEntityProcessorService;
@@ -35,6 +36,7 @@ public class Main extends Application{
         Collection<IGamePluginService> plugins = new ArrayList<>();
 
         plugins.add(new PlayerPlugin());
+        plugins.add(new AsteroidPlugin());
 
         return plugins;
     }
