@@ -1,5 +1,6 @@
 package dk.sdu.cbse.main;
 
+import dk.sdu.cbse.asteroid.AsteroidControl;
 import dk.sdu.cbse.asteroid.AsteroidPlugin;
 import dk.sdu.cbse.common.services.IEntityProcessorService;
 import dk.sdu.cbse.common.services.IGamePluginService;
@@ -47,6 +48,7 @@ public class Main extends Application{
         Collection<IEntityProcessorService> processors = new ArrayList<>();
 
         processors.add(new PlayerControl());
+        processors.add(new AsteroidControl());
 
         return processors;
     }
