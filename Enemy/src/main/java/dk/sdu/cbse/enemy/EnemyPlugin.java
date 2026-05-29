@@ -30,6 +30,7 @@ public class EnemyPlugin implements IGamePluginService {
     @Override
     public void start(GameData gameData, World world)
     {
+        enemy = createEnemy(gameData);
         world.addEntity(enemy);
     }
 
