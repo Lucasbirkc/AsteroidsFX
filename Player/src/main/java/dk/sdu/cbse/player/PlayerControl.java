@@ -1,5 +1,6 @@
 package dk.sdu.cbse.player;
 
+import dk.sdu.cbse.bullet.BulletControl;
 import dk.sdu.cbse.common.data.Entity;
 import dk.sdu.cbse.common.data.GameData;
 import dk.sdu.cbse.common.data.World;
@@ -10,6 +11,12 @@ import dk.sdu.cbse.commoninput.services.IInputService;
 public class PlayerControl implements IEntityProcessorService {
     private final double rotationDelta = 5;
     private final double thrustDelta = 1;
+    private BulletControl bulletFactory;
+
+    public PlayerControl(BulletControl bulletFactory)
+    {
+        this.bulletFactory = bulletFactory;
+    }
 
     @Override
     public void process(GameData gameData, World world)
@@ -38,7 +45,8 @@ public class PlayerControl implements IEntityProcessorService {
                 player.setPosY(player.getPosY() + Math.sin(radians) * thrustDelta);
             }
             if (input.isActive(GameAction.SHOOT)) {
-                System.out.println("Shooting not implemented");
+                Entity bullet = bulletFactory.createBullet(player, gameData);
+                world.addEntity(bullet);
             }
 
             if (player.getPosX() < 0) {
