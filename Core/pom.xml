@@ -10,11 +10,6 @@
   <packaging>jar</packaging>
   <dependencies>
     <dependency>
-      <groupId>${project.groupId}.bullet</groupId>
-      <artifactId>Bullet</artifactId>
-      <version>${project.version}</version>
-    </dependency>
-    <dependency>
       <groupId>org.openjfx</groupId>
       <artifactId>javafx-controls</artifactId>
       <version>21.0.2</version>
@@ -57,6 +52,12 @@
     <dependency>
       <groupId>dk.sdu.cbse</groupId>
       <artifactId>CollisionDetector</artifactId>
+      <version>1.0-SNAPSHOT</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>dk.sdu.cbse.bullet</groupId>
+      <artifactId>Bullet</artifactId>
       <version>1.0-SNAPSHOT</version>
       <scope>compile</scope>
     </dependency>

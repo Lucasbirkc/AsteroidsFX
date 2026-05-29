@@ -10,7 +10,7 @@ public class Entity implements Serializable {
     private double posX;
     private double posY;
     private double rotation;
-    private float radius;
+    private double radius;
 
     public UUID getId() { return this.id; }
 
@@ -59,7 +59,7 @@ public class Entity implements Serializable {
         this.rotation = newRotation;
     }
 
-    public void setRadius(float newRadius)
+    public void setRadius(double newRadius)
     {
         this.radius = newRadius;
     }

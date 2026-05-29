@@ -1,12 +1,9 @@
 package dk.sdu.cbse.main;
 
-import dk.sdu.cbse.asteroid.AsteroidControl;
-import dk.sdu.cbse.asteroid.AsteroidPlugin;
-import dk.sdu.cbse.collisiondetector.CollisionDetector;
 import dk.sdu.cbse.common.services.IEntityProcessorService;
 import dk.sdu.cbse.common.services.IGamePluginService;
 import dk.sdu.cbse.common.services.IPostEntityProcessorService;
-import dk.sdu.cbse.player.Player;
+
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -16,6 +13,10 @@ import java.util.Collection;
 // Hard dependencies : Imports for testing
 import dk.sdu.cbse.player.PlayerPlugin;
 import dk.sdu.cbse.player.PlayerControl;
+import dk.sdu.cbse.asteroid.AsteroidControl;
+import dk.sdu.cbse.asteroid.AsteroidPlugin;
+import dk.sdu.cbse.bullet.BulletControl;
+import dk.sdu.cbse.collisiondetector.CollisionDetector;
 
 public class Main extends Application{
 
@@ -47,8 +48,9 @@ public class Main extends Application{
     {
         // Direct dependency implementation
         Collection<IEntityProcessorService> processors = new ArrayList<>();
-
-        processors.add(new PlayerControl());
+        BulletControl bulletFactory = new BulletControl();
+        processors.add(bulletFactory);
+        processors.add(new PlayerControl(bulletFactory));
         processors.add(new AsteroidControl());
 
         return processors;
