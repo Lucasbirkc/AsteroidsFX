@@ -28,7 +28,6 @@
       <groupId>dk.sdu.cbse.common</groupId>
       <artifactId>Common</artifactId>
       <version>1.0-SNAPSHOT</version>
-      <scope>compile</scope>
     </dependency>
     <!-- Hard dependencies for testing : REMOVE when ServiceLoader, JPMS, or Spring is used.-->
     <dependency>
