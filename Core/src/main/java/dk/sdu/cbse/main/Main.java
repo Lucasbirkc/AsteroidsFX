@@ -13,6 +13,8 @@ import java.util.Collection;
 // Hard dependencies : Imports for testing
 import dk.sdu.cbse.player.PlayerPlugin;
 import dk.sdu.cbse.player.PlayerControl;
+import dk.sdu.cbse.enemy.EnemyControl;
+import dk.sdu.cbse.enemy.EnemyPlugin;
 import dk.sdu.cbse.asteroid.AsteroidControl;
 import dk.sdu.cbse.asteroid.AsteroidPlugin;
 import dk.sdu.cbse.bullet.BulletControl;
@@ -38,6 +40,7 @@ public class Main extends Application{
         // Direct dependency implementation
         Collection<IGamePluginService> plugins = new ArrayList<>();
 
+        plugins.add(new EnemyPlugin());
         plugins.add(new PlayerPlugin());
         plugins.add(new AsteroidPlugin());
 
@@ -50,6 +53,7 @@ public class Main extends Application{
         Collection<IEntityProcessorService> processors = new ArrayList<>();
         BulletControl bulletFactory = new BulletControl();
         processors.add(bulletFactory);
+        processors.add(new EnemyControl(bulletFactory));
         processors.add(new PlayerControl(bulletFactory));
         processors.add(new AsteroidControl());
 

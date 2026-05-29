@@ -60,8 +60,21 @@ class Game {
 
     public void render() {
         new AnimationTimer() {
+            private long lastTime = 0;
+
             @Override
             public void handle(long now) {
+
+                if (lastTime == 0)
+                {
+                    lastTime = now;
+                    return;
+                }
+
+                long secondsPassed = (now - lastTime) / 1000000000;
+                lastTime = now;
+                gameData.setDeltaTime(secondsPassed);
+
                 update();
                 draw();
             }
