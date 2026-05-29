@@ -11,7 +11,20 @@ public class BulletControl implements IEntityProcessorService, IBulletCreator {
 
     @Override
     public void process(GameData gameData, World world) {
+        float moveSpeed = 7;
 
+        for (Entity entity : world.getEntities(Bullet.class))
+        {
+            double radians = Math.toRadians(entity.getRotation());
+
+            entity.setPosX(entity.getPosX() + Math.cos(radians) * moveSpeed);
+            entity.setPosY(entity.getPosY() + Math.sin(radians) * moveSpeed);
+
+            if (isOutOfBounds(entity, gameData))
+            {
+                world.removeEntity(entity);
+            }
+        }
     }
 
     @Override
@@ -20,10 +33,28 @@ public class BulletControl implements IEntityProcessorService, IBulletCreator {
 
         Entity bullet = new Bullet();
 
-        double entityRotation = Math.toRadians(entity.getRotation());
+        double entityRotationRadians = Math.toRadians(entity.getRotation());
+        bullet.setRotation(entity.getRotation());
 
-        bullet.setRadius(bulletRadius);
+        double offset = entity.getRadius() + bulletRadius;
+        bullet.setPosX(entity.getPosX() + Math.cos(entityRotationRadians) * offset);
+        bullet.setPosY(entity.getPosY() + Math.sin(entityRotationRadians) * offset);
+
+        bullet.setCoordinates(new double[]{
+                -1, -1,
+                 1, -1,
+                 1, 1,
+                -1, 1
+        });
 
         return bullet;
+    }
+
+    private boolean isOutOfBounds(Entity bullet, GameData gameData)
+    {
+        return bullet.getPosX() < 0
+                || bullet.getPosX() > gameData.getDisplayWidth()
+                || bullet.getPosY() < 0
+                || bullet.getPosY() > gameData.getDisplayHeight();
     }
 }
