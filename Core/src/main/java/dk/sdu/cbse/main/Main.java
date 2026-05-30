@@ -7,18 +7,8 @@ import dk.sdu.cbse.common.services.IPostEntityProcessorService;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
-import java.util.ArrayList;
 import java.util.Collection;
-
-// Hard dependencies : Imports for testing
-import dk.sdu.cbse.player.PlayerPlugin;
-import dk.sdu.cbse.player.PlayerControl;
-import dk.sdu.cbse.enemy.EnemyControl;
-import dk.sdu.cbse.enemy.EnemyPlugin;
-import dk.sdu.cbse.asteroid.AsteroidControl;
-import dk.sdu.cbse.asteroid.AsteroidPlugin;
-import dk.sdu.cbse.bullet.BulletControl;
-import dk.sdu.cbse.collisiondetector.CollisionDetector;
+import java.util.ServiceLoader;
 
 public class Main extends Application{
 
@@ -37,36 +27,22 @@ public class Main extends Application{
 
     private Collection<? extends IGamePluginService> getGamePluginServices()
     {
-        // Direct dependency implementation
-        Collection<IGamePluginService> plugins = new ArrayList<>();
-
-        plugins.add(new EnemyPlugin());
-        plugins.add(new PlayerPlugin());
-        plugins.add(new AsteroidPlugin());
-
-        return plugins;
+        return ServiceLoader.load(IGamePluginService.class).stream()
+                .map(ServiceLoader.Provider::get)
+                .toList();
     }
 
     private Collection<? extends IEntityProcessorService> getEntityProcessingServices()
     {
-        // Direct dependency implementation
-        Collection<IEntityProcessorService> processors = new ArrayList<>();
-        BulletControl bulletFactory = new BulletControl();
-        processors.add(bulletFactory);
-        processors.add(new EnemyControl(bulletFactory));
-        processors.add(new PlayerControl(bulletFactory));
-        processors.add(new AsteroidControl());
-
-        return processors;
+        return ServiceLoader.load(IEntityProcessorService.class).stream()
+                .map(ServiceLoader.Provider::get)
+                .toList();
     }
 
     private Collection<? extends IPostEntityProcessorService> getPostEntityProcessingServices()
     {
-        // Direct dependency implementation
-        Collection<IPostEntityProcessorService> postProcessors = new ArrayList<>();
-
-        postProcessors.add(new CollisionDetector());
-
-        return postProcessors;
+        return ServiceLoader.load(IPostEntityProcessorService.class).stream()
+                .map(ServiceLoader.Provider::get)
+                .toList();
     }
 }

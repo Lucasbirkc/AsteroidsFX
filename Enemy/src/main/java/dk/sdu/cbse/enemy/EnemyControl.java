@@ -1,27 +1,19 @@
 package dk.sdu.cbse.enemy;
 
-import dk.sdu.cbse.bullet.BulletControl;
 import dk.sdu.cbse.common.data.Entity;
 import dk.sdu.cbse.common.data.GameData;
 import dk.sdu.cbse.common.data.World;
 import dk.sdu.cbse.common.services.IEntityProcessorService;
-import dk.sdu.cbse.commoninput.data.GameAction;
-import dk.sdu.cbse.commoninput.services.IInputService;
+import dk.sdu.cbse.commonbullet.IBulletCreator;
 
 import java.util.Random;
+import java.util.ServiceLoader;
 
 public class EnemyControl implements IEntityProcessorService {
-
-    private BulletControl bulletFactory;
 
     private final Random random = new Random();
     private final float enemySpeed = 1;
     private float shootTimer = 0;
-
-    public EnemyControl(BulletControl bulletFactory)
-    {
-        this.bulletFactory = bulletFactory;
-    }
 
     @Override
     public void process(GameData gameData, World world)
@@ -59,8 +51,14 @@ public class EnemyControl implements IEntityProcessorService {
 
     private void fireBullet(Entity entity, GameData gameData, World world)
     {
-        Entity bullet = bulletFactory.createBullet(entity, gameData);
-        world.addEntity(bullet);
+        IBulletCreator bulletCreator = ServiceLoader.load(IBulletCreator.class)
+                .findFirst()
+                .orElse(null);
+
+        if (bulletCreator != null) {
+            Entity bullet = bulletCreator.createBullet(entity, gameData);
+            world.addEntity(bullet);
+        }
     }
 
     private void handleOutOfBounds(Entity entity, GameData gameData)
