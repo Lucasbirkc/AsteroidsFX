@@ -9,9 +9,7 @@ public class PlayerPlugin implements IGamePluginService {
 
     private Entity player;
 
-    public PlayerPlugin() {
-        System.out.println("PlayerPlugin initialized");
-    }
+    public PlayerPlugin() {}
 
     public Entity createPlayer(GameData gameData)
     {

@@ -9,6 +9,8 @@ import dk.sdu.cbse.commonbullet.IBulletCreator;
 
 public class BulletControl implements IEntityProcessorService, IBulletCreator {
 
+    public BulletControl() {}
+
     @Override
     public void process(GameData gameData, World world) {
         float moveSpeed = 7;

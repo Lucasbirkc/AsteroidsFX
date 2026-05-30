@@ -9,10 +9,7 @@ public class EnemyPlugin implements IGamePluginService {
 
     private Entity enemy;
 
-    public EnemyPlugin()
-    {
-        System.out.println("EnemyPlugin initialized");
-    }
+    public EnemyPlugin(){}
 
     public Entity createEnemy(GameData gameData)
     {

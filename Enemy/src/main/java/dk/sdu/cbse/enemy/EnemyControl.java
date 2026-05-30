@@ -15,6 +15,8 @@ public class EnemyControl implements IEntityProcessorService {
     private final float enemySpeed = 1;
     private float shootTimer = 0;
 
+    public EnemyControl() {}
+
     @Override
     public void process(GameData gameData, World world)
     {

@@ -14,6 +14,8 @@ public class PlayerControl implements IEntityProcessorService {
     private final double rotationDelta = 5;
     private final double thrustDelta = 1;
 
+    public PlayerControl() {}
+
     @Override
     public void process(GameData gameData, World world)
     {

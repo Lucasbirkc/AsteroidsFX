@@ -8,6 +8,8 @@ import dk.sdu.cbse.commonbullet.Bullet;
 
 public class BulletPlugin implements IGamePluginService {
 
+    public BulletPlugin() {}
+
     @Override
     public void start(GameData gameData, World world)
     {

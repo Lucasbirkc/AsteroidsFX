@@ -4,6 +4,7 @@ import dk.sdu.cbse.common.services.IEntityProcessorService;
 import dk.sdu.cbse.common.services.IGamePluginService;
 import dk.sdu.cbse.common.services.IPostEntityProcessorService;
 
+import dk.sdu.cbse.commonbullet.IBulletCreator;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -21,6 +22,9 @@ public class Main extends Application{
         System.out.println("Main main");
 
         Game game = new Game(getGamePluginServices(), getEntityProcessingServices(), getPostEntityProcessingServices());
+
+        IBulletCreator bulletFactory = ServiceLoader.load(IBulletCreator.class).findFirst().orElse(null);
+
         game.start(window);
         game.render();
     }
