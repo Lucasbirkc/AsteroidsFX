@@ -1,34 +1,66 @@
 package dk.sdu.cbse.common.data;
 
-import dk.sdu.cbse.common.parts.IEntityPart;
-
-import java.util.Collection;
-import java.util.Map;
+import java.io.Serializable;
 import java.util.UUID;
-import java.util.concurrent.ConcurrentHashMap;
 
-public class Entity {
-    private final String id;
-    private final Map<Class<? extends IEntityPart>, IEntityPart> parts;
+public class Entity implements Serializable {
+    private final UUID id = UUID.randomUUID();
 
-    public Entity() {
-        this.id = UUID.randomUUID().toString();
-        this.parts = new ConcurrentHashMap<>();
+    private double[] coordinates;
+    private double posX;
+    private double posY;
+    private double rotation;
+    private double radius;
+
+    public UUID getId() { return this.id; }
+
+    public double[] getCoordinates()
+    {
+        return this.coordinates;
     }
 
-    public String getId() {
-        return id;
+    public double getPosX()
+    {
+        return this.posX;
     }
 
-    public void addPart(IEntityPart part) {
-        this.parts.put(part.getClass(), part);
+    public double getPosY()
+    {
+        return this.posY;
     }
 
-    public void removePart(IEntityPart part) {
-        this.parts.remove(part.getClass());
+    public double getRotation()
+    {
+        return this.rotation;
     }
 
-    public Collection<IEntityPart> getParts() {
-        return this.parts.values();
+    public double getRadius()
+    {
+        return this.radius;
+    }
+
+    public void setCoordinates(double[] newCoordinates)
+    {
+        this.coordinates = newCoordinates;
+    }
+
+    public void setPosX(double newX)
+    {
+        this.posX = newX;
+    }
+
+    public void setPosY(double newY)
+    {
+        this.posY = newY;
+    }
+
+    public void setRotation(double newRotation)
+    {
+        this.rotation = newRotation;
+    }
+
+    public void setRadius(double newRadius)
+    {
+        this.radius = newRadius;
     }
 }
