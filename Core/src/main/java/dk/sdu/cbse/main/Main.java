@@ -22,9 +22,7 @@ public class Main extends Application{
         System.out.println("Main main");
 
         Game game = new Game(getGamePluginServices(), getEntityProcessingServices(), getPostEntityProcessingServices());
-
-        IBulletCreator bulletFactory = ServiceLoader.load(IBulletCreator.class).findFirst().orElse(null);
-
+        
         game.start(window);
         game.render();
     }
