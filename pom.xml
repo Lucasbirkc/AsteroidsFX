@@ -7,6 +7,7 @@
   <name>AsteroidsFX</name>
   <modules>
     <module>Core</module>
+    <module>Common</module>
     <module>Player</module>
     <module>Enemy</module>
     <module>Bullet</module>
